@@ -8,13 +8,9 @@
 <meta name="apple-mobile-web-app-title" content="Date Planner 💕"/>
 <title>Date Planner 💕</title>
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet"/>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:rgba(0,0,0,0);}
-:root{
-  --pink:#e8185a;--pink-light:#fff0f5;--pink-mid:#fce4ec;
-  --pink-soft:#f78fb3;--white:#fff;--grey:#888;--border:#f0e0e8;
-}
+:root{--pink:#e8185a;--pink-light:#fff0f5;--pink-mid:#fce4ec;--pink-soft:#f78fb3;--white:#fff;--grey:#888;--border:#f0e0e8;}
 html,body{min-height:100%;min-height:100dvh;background:var(--pink-light);font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;overscroll-behavior:none;}
 body{display:flex;align-items:flex-start;justify-content:center;padding:0;}
 #app{width:100%;max-width:480px;min-height:100vh;min-height:100dvh;background:var(--white);display:flex;flex-direction:column;position:relative;overflow:hidden;}
@@ -25,20 +21,14 @@ body{display:flex;align-items:flex-start;justify-content:center;padding:0;}
 @keyframes fadeIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
 .pac{font-family:'Pacifico',cursive;color:var(--pink);text-align:center;line-height:1.3;margin-bottom:0.35rem;}
 .sub{color:var(--grey);font-size:0.88rem;text-align:center;margin-bottom:1.4rem;}
-
-/* Buttons — always <button> for iOS compatibility */
 button{-webkit-appearance:none;appearance:none;cursor:pointer;font-family:inherit;}
 .pink-btn{display:block;background:var(--pink);color:#fff;border:none;border-radius:50px;padding:16px 36px;font-size:1rem;font-weight:700;width:100%;max-width:320px;margin-top:1rem;letter-spacing:0.3px;touch-action:manipulation;}
 .pink-btn:disabled{background:#f0a0b8;opacity:0.7;}
 .skip-link{background:none;border:none;color:#bbb;font-size:0.85rem;text-decoration:underline;margin-top:0.8rem;padding:8px;touch-action:manipulation;}
-
-/* Screen 1 */
 #s1{justify-content:center;min-height:calc(100vh - 4px);min-height:calc(100dvh - 4px);}
 .heart-wrap{animation:pulse 1.2s ease-in-out infinite;margin-bottom:1.4rem;}
 @keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.18);}}
 #no-btn{background:#f5f5f5;color:#666;border:1px solid #ddd;border-radius:50px;padding:14px 28px;font-size:0.95rem;margin-top:0;touch-action:manipulation;}
-
-/* Calendar */
 .cal-wrap{background:var(--white);border:1.5px solid var(--border);border-radius:16px;padding:1rem;width:100%;margin-bottom:1rem;}
 .cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;font-size:0.9rem;font-weight:600;color:#333;}
 .cal-nav button{background:none;border:none;color:var(--pink);font-size:1.8rem;padding:4px 10px;line-height:1;touch-action:manipulation;}
@@ -48,29 +38,31 @@ button{-webkit-appearance:none;appearance:none;cursor:pointer;font-family:inheri
 .cal-grid .dc.other{color:#ddd;pointer-events:none;}
 .cal-grid .dc.selected{background:var(--pink);color:#fff;font-weight:700;}
 .cal-grid .dc.today{font-weight:700;color:var(--pink);}
-
-/* Time cards */
 .time-opts{display:flex;flex-direction:column;gap:9px;width:100%;}
 .time-card{border:1.5px solid #eee;border-radius:14px;padding:13px 16px;display:flex;align-items:center;gap:12px;cursor:pointer;touch-action:manipulation;user-select:none;-webkit-user-select:none;}
 .time-card.selected{border-color:var(--pink);background:var(--pink-light);}
 .time-card .tc-icon{font-size:1.3rem;width:28px;text-align:center;}
 .time-card .tc-title{font-weight:600;font-size:0.92rem;color:#222;}
 .time-card .tc-sub{font-size:0.76rem;color:#aaa;margin-top:1px;}
-
-/* Food & drink grids */
 .food-grid,.drink-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;width:100%;}
 .food-card,.drink-card{background:var(--white);border:1.5px solid #eee;border-radius:14px;padding:14px 8px;text-align:center;cursor:pointer;touch-action:manipulation;user-select:none;-webkit-user-select:none;}
 .food-card.selected,.drink-card.selected{border-color:var(--pink);background:var(--pink-light);}
 .food-emoji,.drink-emoji{font-size:2rem;display:block;margin-bottom:6px;}
 .food-label,.drink-label{font-size:0.78rem;color:#333;font-weight:500;line-height:1.3;}
 
-/* Result */
-.result-card{background:var(--white);border:1.5px solid var(--border);border-radius:18px;padding:1.2rem 1.4rem;width:100%;margin-top:0.8rem;}
-.result-card .row{display:flex;align-items:center;gap:12px;padding:9px 0;font-size:0.95rem;color:#333;border-bottom:1px solid #f9f0f3;}
+/* Result card */
+.result-card{background:linear-gradient(135deg,#fff0f5 0%,#fff 60%);border:2px solid var(--border);border-radius:20px;padding:1.4rem 1.4rem 1.2rem;width:100%;margin-top:0.8rem;position:relative;overflow:hidden;}
+.result-card::before{content:'💕';position:absolute;font-size:5rem;opacity:0.07;top:-10px;right:-10px;}
+.result-card .r-title{font-family:'Pacifico',cursive;color:var(--pink);font-size:1.1rem;text-align:center;margin-bottom:1rem;}
+.result-card .row{display:flex;align-items:flex-start;gap:12px;padding:8px 0;font-size:0.93rem;color:#333;border-bottom:1px solid #f9f0f3;}
 .result-card .row:last-child{border-bottom:none;}
-.result-card .row .icon{font-size:1.1rem;width:24px;text-align:center;flex-shrink:0;}
+.result-card .row .icon{font-size:1.1rem;width:24px;text-align:center;flex-shrink:0;margin-top:1px;}
+.result-card .row .val{flex:1;line-height:1.4;}
+
 .btn-row{display:flex;flex-direction:column;gap:10px;width:100%;align-items:center;margin-top:1rem;}
-#shot-msg{font-size:0.82rem;color:var(--pink);margin-top:0.6rem;display:none;text-align:center;}
+.share-btn{background:var(--pink);color:#fff;border:none;border-radius:50px;padding:16px 36px;font-size:1rem;font-weight:700;width:100%;max-width:320px;touch-action:manipulation;display:flex;align-items:center;justify-content:center;gap:8px;}
+.copy-btn{background:#fff;color:var(--pink);border:2px solid var(--pink);border-radius:50px;padding:14px 36px;font-size:1rem;font-weight:700;width:100%;max-width:320px;touch-action:manipulation;}
+#copy-msg{font-size:0.82rem;color:var(--pink);margin-top:0.4rem;display:none;text-align:center;}
 
 /* Hearts */
 #hearts-bg span{position:fixed;font-size:1.4rem;opacity:0;animation:floatUp 2.2s ease-in forwards;pointer-events:none;z-index:999;}
@@ -123,14 +115,14 @@ button{-webkit-appearance:none;appearance:none;cursor:pointer;font-family:inheri
     <div class="pac" style="font-size:clamp(1.4rem,6vw,2rem);">What are you feeling? 🍽️</div>
     <div class="sub">Pick as many as you like!</div>
     <div class="food-grid">
-      <div class="food-card" data-food="Pizza Night"><span class="food-emoji">🍕</span><div class="food-label">Pizza Night</div></div>
-      <div class="food-card" data-food="Fancy Sushi"><span class="food-emoji">🍣</span><div class="food-label">Fancy Sushi</div></div>
-      <div class="food-card" data-food="Burgers &amp; Shakes"><span class="food-emoji">🍔</span><div class="food-label">Burgers &amp; Shakes</div></div>
-      <div class="food-card" data-food="Taco Tuesday"><span class="food-emoji">🌮</span><div class="food-label">Taco Tuesday</div></div>
-      <div class="food-card" data-food="Cozy Italian"><span class="food-emoji">🍝</span><div class="food-label">Cozy Italian</div></div>
-      <div class="food-card" data-food="Something Light"><span class="food-emoji">🥗</span><div class="food-label">Something Light</div></div>
-      <div class="food-card" data-food="Coffee &amp; Dessert"><span class="food-emoji">☕</span><div class="food-label">Coffee &amp; Dessert</div></div>
-      <div class="food-card" data-food="Ramen Vibes"><span class="food-emoji">🍜</span><div class="food-label">Ramen Vibes</div></div>
+      <div class="food-card" data-food="Pizza Night">       <span class="food-emoji">🍕</span><div class="food-label">Pizza Night</div></div>
+      <div class="food-card" data-food="Fancy Sushi">       <span class="food-emoji">🍣</span><div class="food-label">Fancy Sushi</div></div>
+      <div class="food-card" data-food="Burgers & Shakes">  <span class="food-emoji">🍔</span><div class="food-label">Burgers &amp; Shakes</div></div>
+      <div class="food-card" data-food="Taco Tuesday">      <span class="food-emoji">🌮</span><div class="food-label">Taco Tuesday</div></div>
+      <div class="food-card" data-food="Cozy Italian">      <span class="food-emoji">🍝</span><div class="food-label">Cozy Italian</div></div>
+      <div class="food-card" data-food="Something Light">   <span class="food-emoji">🥗</span><div class="food-label">Something Light</div></div>
+      <div class="food-card" data-food="Coffee & Dessert">  <span class="food-emoji">☕</span><div class="food-label">Coffee &amp; Dessert</div></div>
+      <div class="food-card" data-food="Ramen Vibes">       <span class="food-emoji">🍜</span><div class="food-label">Ramen Vibes</div></div>
     </div>
     <button class="pink-btn" id="s3-next" disabled>Next 🍹</button>
   </div>
@@ -140,13 +132,13 @@ button{-webkit-appearance:none;appearance:none;cursor:pointer;font-family:inheri
     <div class="pac" style="font-size:clamp(1.4rem,6vw,2rem);">What are you drinking? 🥂</div>
     <div class="sub">Pick as many as you like!</div>
     <div class="drink-grid">
-      <div class="drink-card" data-drink="Red Wine"><span class="drink-emoji">🍷</span><div class="drink-label">Red Wine</div></div>
-      <div class="drink-card" data-drink="Champagne"><span class="drink-emoji">🥂</span><div class="drink-label">Champagne</div></div>
-      <div class="drink-card" data-drink="Cocktails"><span class="drink-emoji">🍹</span><div class="drink-label">Cocktails</div></div>
-      <div class="drink-card" data-drink="Beer"><span class="drink-emoji">🍺</span><div class="drink-label">Beer</div></div>
-      <div class="drink-card" data-drink="Whiskey"><span class="drink-emoji">🥃</span><div class="drink-label">Whiskey</div></div>
-      <div class="drink-card" data-drink="Tequila Shots"><span class="drink-emoji">🎯</span><div class="drink-label">Tequila Shots</div></div>
-      <div class="drink-card" data-drink="Rosé"><span class="drink-emoji">🍾</span><div class="drink-label">Rosé</div></div>
+      <div class="drink-card" data-drink="Red Wine">      <span class="drink-emoji">🍷</span><div class="drink-label">Red Wine</div></div>
+      <div class="drink-card" data-drink="Champagne">     <span class="drink-emoji">🥂</span><div class="drink-label">Champagne</div></div>
+      <div class="drink-card" data-drink="Cocktails">     <span class="drink-emoji">🍹</span><div class="drink-label">Cocktails</div></div>
+      <div class="drink-card" data-drink="Beer">          <span class="drink-emoji">🍺</span><div class="drink-label">Beer</div></div>
+      <div class="drink-card" data-drink="Whiskey">       <span class="drink-emoji">🥃</span><div class="drink-label">Whiskey</div></div>
+      <div class="drink-card" data-drink="Tequila Shots"> <span class="drink-emoji">🎯</span><div class="drink-label">Tequila Shots</div></div>
+      <div class="drink-card" data-drink="Rosé">          <span class="drink-emoji">🍾</span><div class="drink-label">Rosé</div></div>
       <div class="drink-card" data-drink="Mocktails Only"><span class="drink-emoji">🧃</span><div class="drink-label">Mocktails Only</div></div>
     </div>
     <button class="pink-btn" id="s35-next" disabled>Next 💌</button>
@@ -156,273 +148,213 @@ button{-webkit-appearance:none;appearance:none;cursor:pointer;font-family:inheri
   <!-- SCREEN 4 -->
   <div id="s4" class="screen">
     <div class="pac" style="font-size:clamp(1.8rem,7vw,2.6rem);">It's a date! 💌</div>
-    <div class="sub">I'm so excited! Here's the plan:</div>
-    <form id="date-form" action="https://formspree.io/f/YOUR_FORMSPREE_ID_HERE" method="POST" style="width:100%;">
-      <input type="hidden" name="Date Selected" id="form-date">
-      <input type="hidden" name="Time Selected" id="form-time">
-      <input type="hidden" name="Food Choices" id="form-food">
-      <input type="hidden" name="Drink Choices" id="form-drinks">
-      <input type="hidden" name="Visual Screenshot" id="form-screenshot">
-      <div class="result-card" id="capture-area">
-        <div class="row"><span class="icon">📅</span><span id="r-date"></span></div>
-        <div class="row"><span class="icon">⏰</span><span id="r-time"></span></div>
-        <div class="row"><span class="icon">🍽️</span><span id="r-food"></span></div>
-        <div class="row" id="r-drinks-row"><span class="icon">🍷</span><span id="r-drinks"></span></div>
-      </div>
-    </form>
-    <div class="btn-row">
-      <button class="pink-btn" id="screenshot-btn">📸 Save Screenshot</button>
-      <button class="pink-btn" id="restart-btn" style="background:var(--pink-soft);">Start over 🔄</button>
+    <div class="sub">Here's our plan — share it or copy it!</div>
+    <div class="result-card">
+      <div class="r-title">Our Date Plan 💕</div>
+      <div class="row"><span class="icon">📅</span><span class="val" id="r-date"></span></div>
+      <div class="row"><span class="icon">⏰</span><span class="val" id="r-time"></span></div>
+      <div class="row"><span class="icon">🍽️</span><span class="val" id="r-food"></span></div>
+      <div class="row" id="r-drinks-row"><span class="icon">🍷</span><span class="val" id="r-drinks"></span></div>
     </div>
-    <div id="shot-msg">✅ Image downloaded!</div>
+    <div class="btn-row">
+      <button class="share-btn" id="share-btn">📤 Share Date Plan</button>
+      <button class="copy-btn" id="copy-btn">📋 Copy to Clipboard</button>
+      <button class="pink-btn" id="restart-btn" style="background:var(--pink-soft);margin-top:0;">Start over 🔄</button>
+    </div>
+    <div id="copy-msg">✅ Copied! Paste it anywhere 💕</div>
     <div id="hearts-bg"></div>
   </div>
 </div>
 
 <script>
-(function() {
-  var state = {step:1, calYear:2026, calMonth:5, selDay:null, selTime:null, selFoods:[], selDrinks:[]};
-  var noMoves = 0;
-  var MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-  var DAYS = ['Su','Mo','Tu','We','Th','Fr','Sa'];
-  var timeLabels = {morning:'in the morning', afternoon:'in the afternoon', evening:'in the evening', latenight:'late at night'};
-  var progressMap = {'1':0, '2':25, '3':50, '35':70, '4':100};
+(function(){
+  var state={step:1,calYear:2026,calMonth:5,selDay:null,selTime:null,selFoods:[],selDrinks:[]};
+  var noMoves=0;
+  var MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  var DAYS=['Su','Mo','Tu','We','Th','Fr','Sa'];
+  var timeLabels={morning:'Morning ☀️',afternoon:'Afternoon 🌤',evening:'Evening 🌙',latenight:'Late Night ✨'};
+  var progressMap={'1':0,'2':25,'3':50,'35':70,'4':100};
 
-  /* ---- NAVIGATION ---- */
-  function go(n) {
-    document.querySelectorAll('.screen').forEach(function(s){ s.classList.remove('active'); });
+  function go(n){
+    document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});
     document.getElementById('s'+n).classList.add('active');
-    state.step = n;
-    window.scrollTo(0, 0);
-    document.getElementById('progress-fill').style.width = (progressMap[String(n)] || 0) + '%';
-    if(n === 2) renderCal();
-    if(n === 4) showResult();
+    state.step=n; window.scrollTo(0,0);
+    document.getElementById('progress-fill').style.width=(progressMap[String(n)]||0)+'%';
+    if(n===2) renderCal();
+    if(n===4) showResult();
   }
 
-  /* ---- TAP HELPER: works on both touch and click ---- */
-  function onTap(el, fn) {
-    var moved = false;
-    el.addEventListener('touchstart', function(e){ moved = false; }, {passive:true});
-    el.addEventListener('touchmove', function(e){ moved = true; }, {passive:true});
-    el.addEventListener('touchend', function(e){
-      if(!moved){ e.preventDefault(); fn(e); }
-    });
-    el.addEventListener('click', function(e){ fn(e); });
+  /* iOS-safe tap handler */
+  function onTap(el,fn){
+    var moved=false;
+    el.addEventListener('touchstart',function(){moved=false;},{passive:true});
+    el.addEventListener('touchmove',function(){moved=true;},{passive:true});
+    el.addEventListener('touchend',function(e){if(!moved){e.preventDefault();fn(e);}});
+    el.addEventListener('click',function(e){fn(e);});
   }
 
-  /* ---- SCREEN 1 ---- */
-  onTap(document.getElementById('yes-btn'), function(){ go(2); });
-
-  var noBtn = document.getElementById('no-btn');
-  onTap(noBtn, function(){ runAway(noBtn); });
-
-  function runAway(btn) {
+  /* Screen 1 */
+  onTap(document.getElementById('yes-btn'),function(){go(2);});
+  var noBtn=document.getElementById('no-btn');
+  onTap(noBtn,function(){
     noMoves++;
-    var app = document.getElementById('app');
-    var maxX = app.offsetWidth - btn.offsetWidth - 16;
-    var maxY = app.offsetHeight - btn.offsetHeight - 16;
-    btn.style.position = 'absolute';
-    btn.style.left = Math.max(8, Math.floor(Math.random() * maxX)) + 'px';
-    btn.style.top  = Math.max(8, Math.floor(Math.random() * maxY)) + 'px';
-    if(noMoves >= 3) btn.style.fontSize = '0.7rem';
-    if(noMoves >= 5) btn.style.opacity = '0.3';
-    if(noMoves >= 7) btn.style.display = 'none';
-  }
+    var app=document.getElementById('app');
+    var maxX=app.offsetWidth-noBtn.offsetWidth-16;
+    var maxY=app.offsetHeight-noBtn.offsetHeight-16;
+    noBtn.style.position='absolute';
+    noBtn.style.left=Math.max(8,Math.floor(Math.random()*maxX))+'px';
+    noBtn.style.top=Math.max(8,Math.floor(Math.random()*maxY))+'px';
+    if(noMoves>=3) noBtn.style.fontSize='0.7rem';
+    if(noMoves>=5) noBtn.style.opacity='0.3';
+    if(noMoves>=7) noBtn.style.display='none';
+  });
 
-  /* ---- SCREEN 2: CALENDAR ---- */
-  onTap(document.getElementById('prev-month'), function(){
-    state.calMonth--;
-    if(state.calMonth < 0){ state.calMonth = 11; state.calYear--; }
-    renderCal();
+  /* Screen 2 calendar */
+  onTap(document.getElementById('prev-month'),function(){
+    state.calMonth--; if(state.calMonth<0){state.calMonth=11;state.calYear--;} renderCal();
   });
-  onTap(document.getElementById('next-month'), function(){
-    state.calMonth++;
-    if(state.calMonth > 11){ state.calMonth = 0; state.calYear++; }
-    renderCal();
+  onTap(document.getElementById('next-month'),function(){
+    state.calMonth++; if(state.calMonth>11){state.calMonth=0;state.calYear++;} renderCal();
   });
-  onTap(document.getElementById('s2-next'), function(){
+  onTap(document.getElementById('s2-next'),function(){
     if(!document.getElementById('s2-next').disabled) go(3);
   });
 
-  function renderCal() {
-    var yr = state.calYear, mo = state.calMonth;
-    document.getElementById('cal-label').textContent = MONTHS[mo] + ' ' + yr;
-    var grid = document.getElementById('cal-grid');
-    grid.innerHTML = '';
-    DAYS.forEach(function(d){
-      var el = document.createElement('div'); el.className='dh'; el.textContent=d; grid.appendChild(el);
-    });
-    var first = new Date(yr,mo,1).getDay();
-    var prevDays = new Date(yr,mo,0).getDate();
-    for(var i=0;i<first;i++){
-      var el=document.createElement('div'); el.className='dc other'; el.textContent=prevDays-first+1+i; grid.appendChild(el);
-    }
-    var days = new Date(yr,mo+1,0).getDate();
-    var today = new Date();
+  function renderCal(){
+    var yr=state.calYear,mo=state.calMonth;
+    document.getElementById('cal-label').textContent=MONTHS[mo]+' '+yr;
+    var grid=document.getElementById('cal-grid'); grid.innerHTML='';
+    DAYS.forEach(function(d){var el=document.createElement('div');el.className='dh';el.textContent=d;grid.appendChild(el);});
+    var first=new Date(yr,mo,1).getDay();
+    var prevDays=new Date(yr,mo,0).getDate();
+    for(var i=0;i<first;i++){var el=document.createElement('div');el.className='dc other';el.textContent=prevDays-first+1+i;grid.appendChild(el);}
+    var days=new Date(yr,mo+1,0).getDate();
+    var today=new Date();
     for(var d=1;d<=days;d++){
       var el=document.createElement('div'); el.className='dc';
       if(today.getFullYear()===yr&&today.getMonth()===mo&&today.getDate()===d) el.classList.add('today');
       if(state.selDay&&state.selDay.y===yr&&state.selDay.m===mo&&state.selDay.d===d) el.classList.add('selected');
       el.textContent=d;
-      (function(dd){
-        onTap(el, function(){
-          state.selDay={y:yr,m:mo,d:dd};
-          renderCal(); checkS2();
-        });
-      })(d);
+      (function(dd){onTap(el,function(){state.selDay={y:yr,m:mo,d:dd};renderCal();checkS2();});})(d);
       grid.appendChild(el);
     }
   }
-
-  function checkS2(){ document.getElementById('s2-next').disabled = !(state.selDay && state.selTime); }
-
-  /* Time cards */
+  function checkS2(){document.getElementById('s2-next').disabled=!(state.selDay&&state.selTime);}
   document.querySelectorAll('.time-card').forEach(function(card){
-    onTap(card, function(){
-      document.querySelectorAll('.time-card').forEach(function(c){ c.classList.remove('selected'); });
-      card.classList.add('selected');
-      state.selTime = card.getAttribute('data-time');
-      checkS2();
+    onTap(card,function(){
+      document.querySelectorAll('.time-card').forEach(function(c){c.classList.remove('selected');});
+      card.classList.add('selected'); state.selTime=card.getAttribute('data-time'); checkS2();
     });
   });
 
-  /* ---- SCREEN 3: FOOD ---- */
-  onTap(document.getElementById('s3-next'), function(){
-    if(!document.getElementById('s3-next').disabled) go(35);
-  });
+  /* Screen 3 food */
+  onTap(document.getElementById('s3-next'),function(){if(!document.getElementById('s3-next').disabled) go(35);});
   document.querySelectorAll('.food-card').forEach(function(card){
-    onTap(card, function(){
-      var name = card.getAttribute('data-food');
-      if(card.classList.contains('selected')){
-        card.classList.remove('selected');
-        state.selFoods = state.selFoods.filter(function(f){ return f!==name; });
-      } else {
-        card.classList.add('selected');
-        state.selFoods.push(name);
-      }
-      document.getElementById('s3-next').disabled = state.selFoods.length===0;
+    onTap(card,function(){
+      var name=card.getAttribute('data-food');
+      if(card.classList.contains('selected')){card.classList.remove('selected');state.selFoods=state.selFoods.filter(function(f){return f!==name;});}
+      else{card.classList.add('selected');state.selFoods.push(name);}
+      document.getElementById('s3-next').disabled=state.selFoods.length===0;
     });
   });
 
-  /* ---- SCREEN 3.5: DRINKS ---- */
-  onTap(document.getElementById('s35-next'), function(){
-    if(!document.getElementById('s35-next').disabled) go(4);
-  });
-  onTap(document.getElementById('skip-drinks'), function(){
-    state.selDrinks=[]; go(4);
-  });
+  /* Screen 3.5 drinks */
+  onTap(document.getElementById('s35-next'),function(){if(!document.getElementById('s35-next').disabled) go(4);});
+  onTap(document.getElementById('skip-drinks'),function(){state.selDrinks=[];go(4);});
   document.querySelectorAll('.drink-card').forEach(function(card){
-    onTap(card, function(){
-      var name = card.getAttribute('data-drink');
-      if(card.classList.contains('selected')){
-        card.classList.remove('selected');
-        state.selDrinks = state.selDrinks.filter(function(f){ return f!==name; });
-      } else {
-        card.classList.add('selected');
-        state.selDrinks.push(name);
-      }
-      document.getElementById('s35-next').disabled = state.selDrinks.length===0;
+    onTap(card,function(){
+      var name=card.getAttribute('data-drink');
+      if(card.classList.contains('selected')){card.classList.remove('selected');state.selDrinks=state.selDrinks.filter(function(f){return f!==name;});}
+      else{card.classList.add('selected');state.selDrinks.push(name);}
+      document.getElementById('s35-next').disabled=state.selDrinks.length===0;
     });
   });
 
-  /* ---- SCREEN 4: RESULT ---- */
-  onTap(document.getElementById('screenshot-btn'), function(){ takeScreenshot(); });
-  onTap(document.getElementById('restart-btn'), function(){ restart(); });
+  /* Screen 4 result */
+  onTap(document.getElementById('share-btn'),function(){shareDate();});
+  onTap(document.getElementById('copy-btn'),function(){copyDate();});
+  onTap(document.getElementById('restart-btn'),function(){restart();});
 
-  function showResult() {
-    var sd = state.selDay;
-    var weekday = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][new Date(sd.y,sd.m,sd.d).getDay()];
-    var finalDate  = weekday+', '+MONTHS[sd.m]+' '+sd.d+', '+sd.y;
-    var finalTime  = timeLabels[state.selTime]||state.selTime;
-    var finalFood  = state.selFoods.join(', ');
-    var finalDrinks= state.selDrinks.length>0 ? state.selDrinks.join(', ') : 'No alcohol';
-    document.getElementById('r-date').textContent  = finalDate;
-    document.getElementById('r-time').textContent  = finalTime;
-    document.getElementById('r-food').textContent  = finalFood;
-    document.getElementById('r-drinks').textContent= finalDrinks;
-    document.getElementById('r-drinks-row').style.display = state.selDrinks.length===0?'none':'flex';
-    document.getElementById('form-date').value   = finalDate;
-    document.getElementById('form-time').value   = finalTime;
-    document.getElementById('form-food').value   = finalFood;
-    document.getElementById('form-drinks').value = finalDrinks;
-    if(typeof html2canvas !== 'undefined'){
-      html2canvas(document.getElementById('capture-area')).then(function(canvas){
-        var img = canvas.toDataURL('image/png');
-        document.getElementById('form-screenshot').value = img;
-        var form = document.getElementById('date-form');
-        fetch(form.action,{method:form.method,body:new FormData(form),headers:{'Accept':'application/json'}});
-      });
-    }
+  var shareText='';
+
+  function showResult(){
+    var sd=state.selDay;
+    var weekday=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][new Date(sd.y,sd.m,sd.d).getDay()];
+    var finalDate=weekday+', '+MONTHS[sd.m]+' '+sd.d+', '+sd.y;
+    var finalTime=timeLabels[state.selTime]||state.selTime;
+    var finalFood=state.selFoods.join(', ');
+    var finalDrinks=state.selDrinks.length>0?state.selDrinks.join(', '):'';
+    document.getElementById('r-date').textContent=finalDate;
+    document.getElementById('r-time').textContent=finalTime;
+    document.getElementById('r-food').textContent=finalFood;
+    document.getElementById('r-drinks').textContent=finalDrinks;
+    document.getElementById('r-drinks-row').style.display=state.selDrinks.length===0?'none':'flex';
+
+    shareText='💕 It\'s a Date! 💕\n\n'
+      +'📅 '+finalDate+'\n'
+      +'⏰ '+finalTime+'\n'
+      +'🍽️ '+finalFood
+      +(finalDrinks?'\n🍷 '+finalDrinks:'')
+      +'\n\nI can\'t wait! 💌';
+
+    /* Show/hide share button based on support */
+    var shareSupported = navigator.share && navigator.canShare;
+    document.getElementById('share-btn').style.display = shareSupported ? 'flex' : 'none';
+
     spawnHearts();
   }
 
-  function takeScreenshot() {
-    if(typeof html2canvas === 'undefined') return;
-    // Open new tab FIRST (must be in same tap handler, before async)
-    var newTab = window.open('', '_blank');
-    html2canvas(document.getElementById('capture-area'),{scale:3,backgroundColor:'#ffffff',useCORS:true}).then(function(canvas){
-      var dataUrl = canvas.toDataURL('image/png');
-      if(newTab) {
-        newTab.document.write(
-          '<html><head><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Our Date 💕</title><style>body{margin:0;background:#111;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;font-family:sans-serif;}'
-          +'p{color:#fff;font-size:1rem;text-align:center;padding:16px;line-height:1.6;}'
-          +'img{max-width:100%;border-radius:12px;}'
-          +'</style></head><body>'
-          +'<p>💕 <strong>Press & hold the image below → Save to Photos</strong></p>'
-          +'<img src="'+dataUrl+'"/>'
-          +'</body></html>'
-        );
-        newTab.document.close();
-      } else {
-        // Popup blocked fallback — show inline overlay
-        showImageOverlay(dataUrl);
-      }
-    });
+  function shareDate(){
+    if(navigator.share){
+      navigator.share({title:'Our Date Plan 💕', text:shareText})
+        .catch(function(){});
+    }
   }
 
-  function showImageOverlay(dataUrl) {
-    var old = document.getElementById('img-overlay');
-    if(old) old.remove();
-    var overlay = document.createElement('div');
-    overlay.id = 'img-overlay';
-    overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.88);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;';
-    var tip = document.createElement('div');
-    tip.style.cssText = 'color:#fff;font-size:1rem;font-weight:700;margin-bottom:14px;text-align:center;line-height:1.6;';
-    tip.innerHTML = '💕 <strong>Press &amp; hold the image</strong><br>then tap <em>Save to Photos</em>';
-    var img = document.createElement('img');
-    img.src = dataUrl;
-    img.style.cssText = 'max-width:100%;max-height:60vh;border-radius:14px;';
-    var closeBtn = document.createElement('button');
-    closeBtn.textContent = 'Close ✓';
-    closeBtn.style.cssText = 'margin-top:18px;background:#e8185a;color:#fff;border:none;border-radius:50px;padding:14px 40px;font-size:1rem;font-weight:700;-webkit-appearance:none;touch-action:manipulation;';
-    onTap(closeBtn, function(){ overlay.remove(); });
-    overlay.appendChild(tip); overlay.appendChild(img); overlay.appendChild(closeBtn);
-    document.body.appendChild(overlay);
+  function copyDate(){
+    /* Clipboard API — with textarea fallback for older mobile browsers */
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(shareText).then(showCopyMsg).catch(function(){fallbackCopy();});
+    } else {
+      fallbackCopy();
+    }
   }
 
-  function spawnHearts() {
-    var c = document.getElementById('hearts-bg');
-    c.innerHTML='';
+  function fallbackCopy(){
+    var ta=document.createElement('textarea');
+    ta.value=shareText;
+    ta.style.cssText='position:fixed;top:0;left:0;opacity:0;font-size:16px;';
+    document.body.appendChild(ta);
+    ta.focus(); ta.select();
+    try{document.execCommand('copy'); showCopyMsg();}catch(e){}
+    document.body.removeChild(ta);
+  }
+
+  function showCopyMsg(){
+    var msg=document.getElementById('copy-msg');
+    msg.style.display='block';
+    setTimeout(function(){msg.style.display='none';},3000);
+  }
+
+  function spawnHearts(){
+    var c=document.getElementById('hearts-bg'); c.innerHTML='';
     var emojis=['💕','💖','💗','💓','❤️','🌹'];
     for(var i=0;i<18;i++){
       (function(i){
         setTimeout(function(){
           var s=document.createElement('span');
           s.textContent=emojis[Math.floor(Math.random()*emojis.length)];
-          s.style.left=Math.random()*80+'%';
-          s.style.top=(Math.random()*60+20)+'%';
-          c.appendChild(s);
-          setTimeout(function(){s.remove();},2300);
+          s.style.left=Math.random()*80+'%'; s.style.top=(Math.random()*60+20)+'%';
+          c.appendChild(s); setTimeout(function(){s.remove();},2300);
         },i*120);
       })(i);
     }
   }
 
-  function restart() {
+  function restart(){
     state={step:1,calYear:2026,calMonth:5,selDay:null,selTime:null,selFoods:[],selDrinks:[]};
-    noMoves=0;
-    var nb=document.getElementById('no-btn'); nb.style.cssText='';
-    document.querySelectorAll('.time-card,.food-card,.drink-card').forEach(function(c){ c.classList.remove('selected'); });
+    noMoves=0; noBtn.style.cssText='';
+    document.querySelectorAll('.time-card,.food-card,.drink-card').forEach(function(c){c.classList.remove('selected');});
     document.getElementById('s2-next').disabled=true;
     document.getElementById('s3-next').disabled=true;
     document.getElementById('s35-next').disabled=true;
